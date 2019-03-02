@@ -7,6 +7,12 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   attr_reader :password
 
+  has_many :subs,
+    foreign_key: :moderator_id,
+    primary_key: :id,
+    class_name: :Sub,
+    inverse_of: :moderator
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return user if user && user.is_password?(password)
