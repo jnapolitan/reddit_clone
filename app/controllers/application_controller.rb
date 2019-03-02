@@ -16,11 +16,17 @@ class ApplicationController < ActionController::Base
   def login(user)
     @current_user = user
     session[:token] = user.reset_session_token!
+    render json: @current_user
   end
 
   def logout
-    current_user.reset_session_token!
-    session[:token] = nil
+    if current_user
+      current_user.reset_session_token!
+      session[:token] = nil
+      render json: ['logged out']
+    else
+      render json: ['no user to log out']
+    end
   end
 
   def require_signed_in!
