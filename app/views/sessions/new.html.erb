@@ -6,19 +6,17 @@
     id=""
     value="<%= form_authenticity_token %>">
 
-  <label for="user_username">Username</label>
   <input
     type="text"
     name="user[username]"
-    id="user_username">
-
-  <label for="user_password">Password</label>
+    placeholder="username">
+    
   <input
     type="password"
     name="user[password]"
-    id="user_password">
+    placeholder="password">
 
-  <input type="submit">
+  <input class="btn" type="submit" value="Login">
 </form>
 
 <% if flash.now[:errors] %>
