@@ -23,10 +23,8 @@ class ApplicationController < ActionController::Base
     if current_user
       current_user.reset_session_token!
       session[:token] = nil
-      render json: ['logged out']
-    else
-      render json: ['no user to log out']
     end
+    redirect_to new_session_url
   end
 
   def require_signed_in!
