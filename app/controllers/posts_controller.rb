@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :require_user_owns_post!, only: [:edit, :update]
 
   def new
     @post = Post.new
@@ -37,5 +38,10 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :url, :content, :sub_id, :author_id)
   end
-  
+
+  def require_user_owns_post!
+    return if current_user.posts.find(params[:id])
+    render json: 'Only the post owner can edit.'
+  end
+
 end
