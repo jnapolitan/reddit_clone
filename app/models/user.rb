@@ -13,6 +13,14 @@ class User < ApplicationRecord
     class_name: :Sub,
     inverse_of: :moderator
 
+  has_many :posts,
+    foreign_key: :author_id,
+    primary_key: :id,
+    class_name: :Post,
+    inverse_of: :author
+
+  
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return user if user && user.is_password?(password)
