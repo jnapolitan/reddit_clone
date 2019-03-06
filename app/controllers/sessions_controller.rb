@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    render :new
   end
 
   def create
@@ -13,6 +12,7 @@ class SessionsController < ApplicationController
       login(@user)
     else
       flash.now[:errors] = ['Invalid username or password.']
+      render :new
     end
   end
 

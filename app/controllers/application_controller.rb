@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   def login(user)
     @current_user = user
     session[:token] = user.reset_session_token!
-    render json: @current_user
+    redirect_to subs_url
   end
 
   def logout
