@@ -14,7 +14,9 @@ class SubsController < ApplicationController
   end
 
   def create
+    debugger
     @sub = Sub.new(sub_params)
+    @sub.moderator_id = current_user.id
 
     if @sub.save
       render json: @sub
@@ -40,6 +42,6 @@ class SubsController < ApplicationController
   private
 
   def sub_params
-    params.require(:sub).permit(:title, :description, :moderator_id)
+    params.require(:sub).permit(:title, :description)
   end
 end

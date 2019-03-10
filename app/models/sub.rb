@@ -10,7 +10,7 @@ class Sub < ApplicationRecord
 
   has_many :post_subs,
     inverse_of: :sub,
-    dependant: :destroy
+    dependent: :destroy
 
   has_many :posts,
     through: :post_subs,
