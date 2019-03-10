@@ -14,7 +14,6 @@ class SubsController < ApplicationController
   end
 
   def create
-    debugger
     @sub = Sub.new(sub_params)
     @sub.moderator_id = current_user.id
 

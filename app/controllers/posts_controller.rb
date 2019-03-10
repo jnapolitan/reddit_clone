@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.author_id = current_user.id
 
     if @post.save
       render json: @post
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(
-      :title, :url, :content, :author_id, sub_ids: []
+      :title, :url, :content, sub_ids: []
     )
   end
 
