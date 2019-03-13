@@ -6,7 +6,6 @@ class SubsController < ApplicationController
 
   def show
     @sub = Sub.find(params[:id])
-    render json: @sub
   end
 
   def new
@@ -18,7 +17,7 @@ class SubsController < ApplicationController
     @sub.moderator_id = current_user.id
 
     if @sub.save
-      render json: @sub
+      redirect_to subs_url
     else
       render json: @sub.errors.full_messages
     end
