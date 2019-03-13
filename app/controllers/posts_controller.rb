@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_user_owns_post!, only: [:edit, :update]
+  before_action :require_user_owns_post!, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -8,11 +8,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.author_id = current_user.id
+    @post.sub_id = params[:sub_id]
 
     if @post.save
-      render json: @post
+      redirect_to sub_post_url(@post.sub.id, @post.id)
     else
-      render json: @post.errors.full_messages
+      flash.now[:errors] = @post.errors.full_messages
+      render :new
     end
   end
 
@@ -34,12 +36,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+
+    if @post.destroy
+      redirect_to sub_url(@post.sub.id)
+    else
+      redirect_to sub_post_url(@post.sub.id, @post.id)
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(
-      :title, :url, :content, sub_ids: []
-    )
+    params.require(:post).permit(:title, :url, :content)
   end
 
   def require_user_owns_post!

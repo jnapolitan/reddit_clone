@@ -1,6 +1,5 @@
 class Post < ApplicationRecord
-  validates :title, presence: true
-  validates :subs, presence: { message: 'must have at least one sub' }
+  validates :title, :content, presence: true
 
   belongs_to :author,
     primary_key: :id,
@@ -8,13 +7,8 @@ class Post < ApplicationRecord
     class_name: :User,
     inverse_of: :posts
 
-  has_many :post_subs,
-    inverse_of: :post,
-    dependent: :destroy
-  
-  has_many :subs,
-    through: :post_subs,
-    source: :sub
+  belongs_to :sub
 
-  has_many :comments
+  has_many :comments,
+    dependent: :destroy
 end

@@ -1,4 +1,5 @@
 <%= render partial: 'sub', locals: { sub: @sub } %>
+<%= button_to 'Create post', new_sub_post_url(@sub.id), method: :get, class: 'btn' %>
 <%= button_to 'Back to all subs', subs_url, method: :get, class: 'btn' %>
 <% if current_user.id == @sub.moderator_id %>
   <%= button_to 'Delete sub', sub_url(@sub.id), method: :delete, class: 'btn' %>
