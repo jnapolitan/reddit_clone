@@ -17,9 +17,10 @@ class SubsController < ApplicationController
     @sub.moderator_id = current_user.id
 
     if @sub.save
-      redirect_to subs_url
+      redirect_to sub_url(@sub.id)
     else
-      render json: @sub.errors.full_messages
+      flash.now[:errors] = @sub.errors.full_messages
+      render :new
     end
   end
 
@@ -31,9 +32,10 @@ class SubsController < ApplicationController
     @sub = Sub.find(params[:id])
 
     if @sub.update(sub_params)
-      render json: @sub
+      redirect_to sub_url(@sub.id)
     else
-      render json: @sub.errors.full_messages
+      flash.now[:errors] = @sub.errors.full_messages
+      render :new
     end
   end
 
