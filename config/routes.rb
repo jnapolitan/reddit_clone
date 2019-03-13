@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   resources :users, except: [:edit, :update, :destroy]
   resource :session, only: [:new, :create, :destroy]
-  resources :subs
-
-  resources :posts, except: [:index, :destroy] do
-    resources :comments, only: [:new]
+  resources :subs do 
+    resources :posts, except: [:index] do
+      resources :comments, only: [:new]
+    end
   end
 
   resources :comments, only: [:create]

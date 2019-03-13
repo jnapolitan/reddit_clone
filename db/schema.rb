@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_13_034944) do
+ActiveRecord::Schema.define(version: 2019_03_13_053057) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content", null: false
@@ -22,16 +22,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_034944) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "post_subs", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "sub_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id", "sub_id"], name: "index_post_subs_on_post_id_and_sub_id", unique: true
-    t.index ["post_id"], name: "index_post_subs_on_post_id"
-    t.index ["sub_id"], name: "index_post_subs_on_sub_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.string "url"
@@ -39,7 +29,9 @@ ActiveRecord::Schema.define(version: 2019_03_13_034944) do
     t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sub_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["sub_id"], name: "index_posts_on_sub_id"
   end
 
   create_table "subs", force: :cascade do |t|
