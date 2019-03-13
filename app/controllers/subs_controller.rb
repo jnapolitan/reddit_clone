@@ -1,5 +1,7 @@
 class SubsController < ApplicationController
 
+  before_action :require_user_is_moderator!, only: :destroy
+
   def index
     @subs = Sub.all
   end
@@ -39,9 +41,24 @@ class SubsController < ApplicationController
     end
   end
 
+  def destroy
+    @sub = Sub.find(params[:id])
+      if @sub.destroy
+        redirect_to subs_url
+      else
+        render :show
+      end
+  end
+
   private
 
   def sub_params
     params.require(:sub).permit(:title, :description)
+  end
+
+  def require_user_is_moderator!
+    return if current_user.subs.find(params[:id])
+
+    flash.now[:errors] = ['Only the sub owner can delete.']
   end
 end

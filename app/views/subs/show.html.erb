@@ -1,2 +1,13 @@
 <%= render partial: 'sub', locals: { sub: @sub } %>
 <%= button_to 'Back to all subs', subs_url, method: :get, class: 'btn' %>
+<% if current_user.id == @sub.moderator_id %>
+  <%= button_to 'Delete sub', sub_url(@sub.id), method: :delete, class: 'btn' %>
+<% end %>
+
+<% if flash.now[:errors] %>
+  <ul>
+  <% flash.now[:errors].each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
