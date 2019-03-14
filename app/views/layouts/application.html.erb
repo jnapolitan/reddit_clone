@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RedditClone</title>
+    <title>Threddit</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <div class="session-buttons">
-      <% if current_user %>
-        <%= button_to 'Logout', session_url, method: :delete, class: 'btn' %>
-      <% else %>
-        <%= button_to 'Log in', new_session_url, method: :get, class: 'btn' %>
-        <%= button_to 'Sign up', new_user_url, method: :get, class: 'btn' %>
-      <% end %>
-    </div>
-
     <%= yield %>
   </body>
 </html>

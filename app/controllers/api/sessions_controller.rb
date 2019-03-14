@@ -1,4 +1,5 @@
-class SessionsController < ApplicationController
+class Api::SessionsController < ApplicationController
+  
   def new
   end
 
@@ -11,12 +12,12 @@ class SessionsController < ApplicationController
     if @user
       login(@user)
     else
-      flash.now[:errors] = ['Invalid username or password.']
-      render :new
+      render json: ['Invalid username or password.']
     end
   end
 
   def destroy
     logout
   end
+
 end

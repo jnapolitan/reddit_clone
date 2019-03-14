@@ -1,5 +1,0 @@
-<h1>All subs</h1>
-<% @subs.each do |sub| %>
-  <%= render partial: 'sub', locals: { sub: sub } %>
-<% end %>
-<%= button_to "New sub", new_sub_url, class: "btn", method: :get %>

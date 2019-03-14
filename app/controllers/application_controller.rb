@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
 
   helper_method :current_user, :signed_in?
 
@@ -34,4 +33,5 @@ class ApplicationController < ActionController::Base
   def require_signed_out!
     redirect_to user_url(current_user) if signed_in?
   end
+  
 end

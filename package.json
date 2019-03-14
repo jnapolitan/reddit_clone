@@ -1,5 +1,5 @@
 {
-  "name": "reddit_clone",
+  "name": "threddit",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.3.4",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jnapolitan/reddit_clone.git"
+    "url": "git+https://github.com/jnapolitan/threddit.git"
   },
   "keywords": [],
   "author": "",
