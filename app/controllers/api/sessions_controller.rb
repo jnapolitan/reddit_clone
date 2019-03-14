@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
-  
-  def new
+
+  def show
   end
 
   def create
