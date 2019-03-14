@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_03_13_053057) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text "content", null: false
     t.integer "author_id", null: false
@@ -31,7 +34,6 @@ ActiveRecord::Schema.define(version: 2019_03_13_053057) do
     t.datetime "updated_at", null: false
     t.integer "sub_id"
     t.index ["author_id"], name: "index_posts_on_author_id"
-    t.index ["sub_id"], name: "index_posts_on_sub_id"
   end
 
   create_table "subs", force: :cascade do |t|
